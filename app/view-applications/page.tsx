@@ -77,7 +77,7 @@ export default function ViewApplications() {
     useState<Application | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100 p-4 sm:p-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -90,13 +90,13 @@ export default function ViewApplications() {
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Link>
-        <h1 className="text-4xl font-bold text-orange-800 mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-orange-800 mb-8">
           View Applications
         </h1>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1">
           <Card>
             <CardHeader>
               <CardTitle>Applicants</CardTitle>
@@ -148,7 +148,7 @@ export default function ViewApplications() {
           </Card>
         </div>
 
-        <div className="md:col-span-2">
+        <div className="lg:col-span-2">
           {selectedApplication ? (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -157,7 +157,7 @@ export default function ViewApplications() {
             >
               <Card>
                 <CardHeader>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div>
                       <CardTitle className="text-2xl">
                         {selectedApplication.name}
@@ -166,7 +166,7 @@ export default function ViewApplications() {
                         {selectedApplication.role}
                       </CardDescription>
                     </div>
-                    <div className="flex items-center bg-yellow-100 rounded-full px-3 py-1">
+                    <div className="flex items-center bg-yellow-100 rounded-full px-3 py-1 mt-2 sm:mt-0">
                       <Star className="h-5 w-5 text-yellow-400 mr-1" />
                       <span className="font-semibold">
                         {selectedApplication.rating.toFixed(1)}
@@ -219,10 +219,15 @@ export default function ViewApplications() {
                   </div>
                   <div className="mt-6">
                     <h3 className="font-semibold mb-2">Actions</h3>
-                    <div className="flex space-x-2">
-                      <Button>Schedule Interview</Button>
-                      <Link href={`/messaging/${selectedApplication.id}`}>
-                        <Button variant="outline">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                      <Button className="w-full sm:w-auto">
+                        Schedule Interview
+                      </Button>
+                      <Link
+                        href={`/messaging/${selectedApplication.id}`}
+                        className="w-full sm:w-auto"
+                      >
+                        <Button variant="outline" className="w-full">
                           <MessageSquare className="mr-2 h-4 w-4" />
                           Send Message
                         </Button>
