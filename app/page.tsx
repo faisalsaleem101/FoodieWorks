@@ -118,7 +118,7 @@ function JobSeekerSection() {
               <CardContent className="p-4 flex-grow card-box-shadow">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-4">
-                    <Avatar className="h-10 w-10 mr-3">
+                    <Avatar className="h-16 w-16 mr-3">
                       <AvatarFallback>{job.logo}</AvatarFallback>
                     </Avatar>
                     <div>
