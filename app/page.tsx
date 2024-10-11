@@ -201,7 +201,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          FoodieWorks: Restaurant Industry Job Board
+          Short Staffed. Restaurant Industry Job
         </motion.h1>
 
         <div className="flex justify-center mb-8">
