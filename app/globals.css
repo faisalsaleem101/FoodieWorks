@@ -80,3 +80,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.card-box-shadow {
+  box-shadow: rgb(135 142 149) 0px 20px 30px -10px;
+}
