@@ -30,7 +30,7 @@ function JobSeekerSection() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="mb-8">
+      <Card className="mb-8 search-box-shadow">
         <CardHeader>
           <CardTitle>Find Your Next Culinary Adventure</CardTitle>
           <CardDescription>
@@ -185,10 +185,10 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("jobSeeker");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100">
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
       <main className="container mx-auto px-4 py-8">
         <motion.h1
-          className="text-4xl font-bold text-center mb-8 text-orange-800"
+          className="text-4xl font-bold text-center mb-8 text-black"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
