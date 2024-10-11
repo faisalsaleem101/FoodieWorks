@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import Footer from "./footer";
 
 function JobSeekerSection() {
   return (
@@ -58,6 +59,7 @@ function JobSeekerSection() {
             id: 1,
             company: "Gourmet Delights",
             logo: "G",
+            image: "/placeholder.svg?height=64&width=64",
             title: "Head Chef",
             location: "New York, NY",
             type: "Full Time",
@@ -76,6 +78,7 @@ function JobSeekerSection() {
             id: 2,
             company: "Flavor Haven",
             logo: "F",
+            image: "/placeholder.svg?height=64&width=64",
             title: "Sous Chef",
             location: "Los Angeles, CA",
             type: "Part Time",
@@ -94,6 +97,7 @@ function JobSeekerSection() {
             id: 3,
             company: "Sweet Sensations",
             logo: "S",
+            image: "/placeholder.svg?height=64&width=64",
             title: "Pastry Chef",
             location: "Chicago, IL",
             type: "Contract",
@@ -119,6 +123,10 @@ function JobSeekerSection() {
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-4">
                     <Avatar className="h-16 w-16 mr-3">
+                      <AvatarImage
+                        src={job.image}
+                        alt={`${job.company} logo`}
+                      />
                       <AvatarFallback>{job.logo}</AvatarFallback>
                     </Avatar>
                     <div>
@@ -215,6 +223,7 @@ export default function Home() {
         {activeTab === "jobSeeker" && <JobSeekerSection />}
         {activeTab === "employer" && <EmployerSection />}
       </main>
+      <Footer />
     </div>
   );
 }
