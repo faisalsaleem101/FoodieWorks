@@ -34,7 +34,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
           <Button
@@ -64,7 +63,6 @@ export default function Home() {
         {activeTab === "jobSeeker" && <JobSeekerSection />}
         {activeTab === "employer" && <EmployerSection />}
       </main>
-      <Footer />
     </div>
   );
 }
