@@ -12,6 +12,11 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -76,7 +81,7 @@ export default function Header() {
   );
 }
 
-function MobileMenu({ isOpen, onClose }) {
+function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <motion.div
       className={`fixed inset-0 bg-white z-50 ${isOpen ? "block" : "hidden"}`}
