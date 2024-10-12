@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-t from-blue-100 to-white py-12 mt-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-4 text-cyan-700">
               FoodieWorks
@@ -17,33 +17,20 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4 text-cyan-700">
-              For Job Seekers
+              Quick Links
             </h4>
             <ul className="space-y-2 text-gray-600">
               <li>
-                <Link href="/search-jobs">Search Jobs</Link>
+                <Link href="/about-us">About Us</Link>
               </li>
               <li>
-                <Link href="/create-profile">Create Profile</Link>
+                <Link href="/contact">Contact</Link>
               </li>
               <li>
-                <Link href="/career-resources">Career Resources</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-cyan-700">
-              For Employers
-            </h4>
-            <ul className="space-y-2 text-gray-600">
-              <li>
-                <Link href="/post-job">Post a Job</Link>
+                <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link href="/browse-resumes">Browse Resumes</Link>
-              </li>
-              <li>
-                <Link href="/employer-resources">Employer Resources</Link>
+                <Link href="/terms-of-service">Terms of Service</Link>
               </li>
             </ul>
           </div>
@@ -51,7 +38,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4 text-cyan-700">
               Connect With Us
             </h4>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-4">
               <Link href="#" className="text-gray-600 hover:text-cyan-700">
                 <Facebook className="h-6 w-6" />
               </Link>
@@ -65,6 +52,9 @@ export default function Footer() {
                 <Linkedin className="h-6 w-6" />
               </Link>
             </div>
+            <p className="text-gray-600">
+              Stay updated with our latest news and opportunities.
+            </p>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
