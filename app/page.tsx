@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Utensils,
@@ -9,9 +9,6 @@ import {
   PlusCircle,
   Star,
   MessageSquare,
-  Menu,
-  ChefHat,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,8 +23,21 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-import Footer from "./footer";
-import Header from "./header";
+// Define the Job type
+interface Job {
+  id: number;
+  company: string;
+  logo: string;
+  image: string;
+  title: string;
+  location: string;
+  type: string;
+  time: string;
+  tags: string[];
+  isNew: boolean;
+  isFeatured: boolean;
+  rating: number;
+}
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("jobSeeker");
@@ -69,70 +79,114 @@ export default function Home() {
 
 function JobSeekerSection() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [location, setLocation] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
 
-  const jobs = [
-    {
-      id: 1,
-      company: "Gourmet Delights",
-      logo: "G",
-      image: "/placeholder.svg?height=64&width=64",
-      title: "Head Chef",
-      location: "New York, NY",
-      type: "Full Time",
-      time: "1d ago",
-      tags: [
-        "Fine Dining",
-        "Menu Development",
-        "Team Management",
-        "Culinary Expertise",
-      ],
-      isNew: true,
-      isFeatured: true,
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      company: "Flavor Haven",
-      logo: "F",
-      image: "/placeholder.svg?height=64&width=64",
-      title: "Sous Chef",
-      location: "Los Angeles, CA",
-      type: "Part Time",
-      time: "1d ago",
-      tags: [
-        "Kitchen Operations",
-        "Food Preparation",
-        "Inventory Management",
-        "Culinary Creativity",
-      ],
-      isNew: true,
-      isFeatured: true,
-      rating: 4.5,
-    },
-    {
-      id: 3,
-      company: "Sweet Sensations",
-      logo: "S",
-      image: "/placeholder.svg?height=64&width=64",
-      title: "Pastry Chef",
-      location: "Chicago, IL",
-      type: "Contract",
-      time: "2d ago",
-      tags: ["Dessert Creation", "Baking", "Cake Decoration", "Menu Planning"],
-      isNew: true,
-      rating: 4.2,
-    },
-    // ... (other job listings)
-  ];
+  const jobs: Job[] = useMemo(
+    () => [
+      {
+        id: 1,
+        company: "Gourmet Delights",
+        logo: "G",
+        image: "/placeholder.svg?height=64&width=64",
+        title: "Head Chef",
+        location: "New York, NY, USA",
+        type: "Full Time",
+        time: "1d ago",
+        tags: [
+          "Fine Dining",
+          "Menu Development",
+          "Team Management",
+          "Culinary Expertise",
+        ],
+        isNew: true,
+        isFeatured: true,
+        rating: 4.7,
+      },
+      {
+        id: 2,
+        company: "Flavor Haven",
+        logo: "F",
+        image: "/placeholder.svg?height=64&width=64",
+        title: "Sous Chef",
+        location: "Los Angeles, CA, USA",
+        type: "Part Time",
+        time: "1d ago",
+        tags: [
+          "Kitchen Operations",
+          "Food Preparation",
+          "Inventory Management",
+          "Culinary Creativity",
+        ],
+        isNew: true,
+        isFeatured: true,
+        rating: 4.5,
+      },
+      {
+        id: 3,
+        company: "Sweet Sensations",
+        logo: "S",
+        image: "/placeholder.svg?height=64&width=64",
+        title: "Pastry Chef",
+        location: "Chicago, IL, USA",
+        type: "Contract",
+        time: "2d ago",
+        tags: [
+          "Dessert Creation",
+          "Baking",
+          "Cake Decoration",
+          "Menu Planning",
+        ],
+        isNew: true,
+        isFeatured: false,
+        rating: 4.2,
+      },
+    ],
+    []
+  );
 
-  const filteredJobs = jobs.filter((job) => {
-    const searchLower = searchTerm.toLowerCase();
-    return (
-      job.company.toLowerCase().includes(searchLower) ||
-      job.title.toLowerCase().includes(searchLower) ||
-      job.tags.some((tag) => tag.toLowerCase().includes(searchLower))
-    );
-  });
+  useEffect(() => {
+    // Load the Google Places API script
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIEI7uXkQYwR_bPJkuK9FCigqvoZtbGew&libraries=places`;
+    script.async = true;
+    script.onload = initAutocomplete;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const initAutocomplete = () => {
+    const input = document.getElementById("location-input") as HTMLInputElement;
+    if (
+      input &&
+      window.google &&
+      window.google.maps &&
+      window.google.maps.places
+    ) {
+      const autocomplete = new window.google.maps.places.Autocomplete(input);
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        setLocation(place.formatted_address || "");
+      });
+    }
+  };
+
+  useEffect(() => {
+    const filtered = jobs.filter((job) => {
+      const searchLower = searchTerm.toLowerCase();
+      const locationLower = location.toLowerCase();
+      return (
+        (job.company.toLowerCase().includes(searchLower) ||
+          job.title.toLowerCase().includes(searchLower) ||
+          job.tags.some((tag) => tag.toLowerCase().includes(searchLower))) &&
+        job.location.toLowerCase().includes(locationLower)
+      );
+    });
+    setFilteredJobs(filtered);
+  }, [searchTerm, location, jobs]);
 
   return (
     <motion.div
@@ -157,7 +211,13 @@ function JobSeekerSection() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Input placeholder="Location" className="w-full sm:w-1/3" />
+            <Input
+              id="location-input"
+              placeholder="Location"
+              className="w-full sm:w-1/3"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
             <Button className="w-full sm:w-auto bg-cyan-700 hover:bg-cyan-800">
               <Search className="mr-2 h-4 w-4" /> Search
             </Button>
@@ -169,7 +229,7 @@ function JobSeekerSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredJobs.map((job, index) => (
           <motion.div
-            key={index}
+            key={job.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -275,7 +335,7 @@ function EmployerSection() {
           { id: 3, title: "Bartender", applications: 18, rating: 4.5 },
         ].map((listing, index) => (
           <motion.div
-            key={index}
+            key={listing.id}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
