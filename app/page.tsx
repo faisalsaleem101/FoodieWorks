@@ -193,7 +193,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("jobSeeker");
 
   return (
-    <div className="min-h-screen bg-gradient-to-t from-blue-100 to-white ">
+    <div className="min-h-screen bg-gradient-to-t from-blue-100 to-blue-100 ">
       <main className="container mx-auto px-4 py-8">
         <motion.h1
           className="text-4xl font-bold text-center mb-8 text-black"
