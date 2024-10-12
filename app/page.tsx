@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 // Define the Job type
 interface Job {
@@ -207,14 +208,22 @@ function JobSeekerSection() {
           <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
             <Input
               placeholder="Job title, keywords or company"
-              className="w-full sm:w-1/3"
+              className={cn(
+                "w-full sm:w-1/3",
+                "focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2",
+                "transition-shadow duration-200"
+              )}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <Input
               id="location-input"
               placeholder="Location"
-              className="w-full sm:w-1/3"
+              className={cn(
+                "w-full sm:w-1/3",
+                "focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2",
+                "transition-shadow duration-200"
+              )}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
