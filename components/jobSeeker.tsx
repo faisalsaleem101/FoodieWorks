@@ -2,17 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Utensils,
-  Briefcase,
-  Search,
-  PlusCircle,
-  Star,
-  MessageSquare,
-  Menu,
-  ChefHat,
-  X,
-} from "lucide-react";
+import { Search, Star, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -25,49 +15,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-
-import Footer from "./footer";
-import Header from "./header";
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("jobSeeker");
-
-  return (
-    <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex justify-center mb-8">
-          <Button
-            variant={activeTab === "jobSeeker" ? "default" : "outline"}
-            className={`mr-2 ${
-              activeTab === "jobSeeker"
-                ? "bg-cyan-700 hover:bg-cyan-800"
-                : "text-cyan-700 hover:text-cyan-800"
-            }`}
-            onClick={() => setActiveTab("jobSeeker")}
-          >
-            <Briefcase className="mr-2 h-4 w-4" /> Job Seekers
-          </Button>
-          <Button
-            variant={activeTab === "employer" ? "default" : "outline"}
-            className={
-              activeTab === "employer"
-                ? "bg-cyan-700 hover:bg-cyan-800"
-                : "text-cyan-700 hover:text-cyan-800"
-            }
-            onClick={() => setActiveTab("employer")}
-          >
-            <Utensils className="mr-2 h-4 w-4" /> Employers
-          </Button>
-        </div>
-
-        {activeTab === "jobSeeker" && <JobSeekerSection />}
-        {activeTab === "employer" && <EmployerSection />}
-      </main>
-      <Footer />
-    </div>
-  );
-}
 
 function JobSeekerSection() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -154,7 +101,7 @@ function JobSeekerSection() {
         <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
             <Input
-              placeholder="Job title, keywords or company"
+              placeholder="Job title or keywords"
               className="w-full sm:w-1/3"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -246,84 +193,4 @@ function JobSeekerSection() {
   );
 }
 
-function EmployerSection() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Post a New Job</CardTitle>
-          <CardDescription>
-            Find the perfect candidate for your restaurant
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Link href="/create-job-listing">
-            <Button className="bg-cyan-700 hover:bg-cyan-800">
-              <PlusCircle className="mr-2 h-4 w-4" /> Create Job Listing
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
-
-      <h2 className="text-2xl font-semibold mb-4">Your Active Listings</h2>
-      <div className="space-y-4">
-        {[
-          { id: 1, title: "Line Cook", applications: 12, rating: 4.3 },
-          { id: 2, title: "Server", applications: 24, rating: 4.6 },
-          { id: 3, title: "Bartender", applications: 18, rating: 4.5 },
-        ].map((listing, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <CardTitle>{listing.title}</CardTitle>
-                    <CardDescription>
-                      {listing.applications} applications received
-                    </CardDescription>
-                  </div>
-                  <div className="flex items-center bg-yellow-100 rounded-full px-2 py-1">
-                    <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                    <span className="text-sm font-semibold">
-                      {listing.rating.toFixed(1)}
-                    </span>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <Link href="/view-applications">
-                    <Button
-                      variant="default"
-                      className="w-full bg-cyan-700 hover:bg-cyan-800"
-                    >
-                      View Applications
-                    </Button>
-                  </Link>
-                  <Link href={`/messaging/${listing.id}`}>
-                    <Button
-                      variant="outline"
-                      className="w-full text-cyan-700 hover:text-cyan-800"
-                    >
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                      Message Applicants
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
+export default JobSeekerSection;
