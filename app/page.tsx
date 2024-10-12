@@ -9,6 +9,7 @@ import {
   PlusCircle,
   Star,
   MessageSquare,
+  Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import Footer from "./footer";
+import Header from "./header";
 
 function JobSeekerSection() {
   return (
@@ -194,6 +196,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
+      <Header />
       <main className="container mx-auto px-4 py-8">
         {/* <motion.h1
             className="text-4xl font-bold text-center mb-8 text-cyan-800"
