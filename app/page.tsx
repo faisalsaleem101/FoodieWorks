@@ -10,6 +10,8 @@ import {
   Star,
   MessageSquare,
   Menu,
+  ChefHat,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,8 +25,49 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+
 import Footer from "./footer";
 import Header from "./header";
+
+export default function Home() {
+  const [activeTab, setActiveTab] = useState("jobSeeker");
+
+  return (
+    <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
+      <Header />
+      <main className="container mx-auto px-4 py-8">
+        <div className="flex justify-center mb-8">
+          <Button
+            variant={activeTab === "jobSeeker" ? "default" : "outline"}
+            className={`mr-2 ${
+              activeTab === "jobSeeker"
+                ? "bg-cyan-700 hover:bg-cyan-800"
+                : "text-cyan-700 hover:text-cyan-800"
+            }`}
+            onClick={() => setActiveTab("jobSeeker")}
+          >
+            <Briefcase className="mr-2 h-4 w-4" /> Job Seekers
+          </Button>
+          <Button
+            variant={activeTab === "employer" ? "default" : "outline"}
+            className={
+              activeTab === "employer"
+                ? "bg-cyan-700 hover:bg-cyan-800"
+                : "text-cyan-700 hover:text-cyan-800"
+            }
+            onClick={() => setActiveTab("employer")}
+          >
+            <Utensils className="mr-2 h-4 w-4" /> Employers
+          </Button>
+        </div>
+
+        {activeTab === "jobSeeker" && <JobSeekerSection />}
+        {activeTab === "employer" && <EmployerSection />}
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 function JobSeekerSection() {
   return (
@@ -34,13 +77,15 @@ function JobSeekerSection() {
       transition={{ duration: 0.5 }}
     >
       <Card className="mb-8 search-box-shadow">
-        <CardHeader>
-          <CardTitle>Find Your Next Culinary Adventure</CardTitle>
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+            Find Your Next Culinary Adventure
+          </CardTitle>
           <CardDescription>
             Search for jobs in the restaurant industry
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
             <Input
               placeholder="Job title or keywords"
@@ -113,62 +158,6 @@ function JobSeekerSection() {
             isNew: true,
             rating: 4.2,
           },
-          {
-            id: 1,
-            company: "Gourmet Delights",
-            logo: "G",
-            image: "/placeholder.svg?height=64&width=64",
-            title: "Head Chef",
-            location: "New York, NY",
-            type: "Full Time",
-            time: "1d ago",
-            tags: [
-              "Fine Dining",
-              "Menu Development",
-              "Team Management",
-              "Culinary Expertise",
-            ],
-            isNew: true,
-            isFeatured: true,
-            rating: 4.7,
-          },
-          {
-            id: 2,
-            company: "Flavor Haven",
-            logo: "F",
-            image: "/placeholder.svg?height=64&width=64",
-            title: "Sous Chef",
-            location: "Los Angeles, CA",
-            type: "Part Time",
-            time: "1d ago",
-            tags: [
-              "Kitchen Operations",
-              "Food Preparation",
-              "Inventory Management",
-              "Culinary Creativity",
-            ],
-            isNew: true,
-            isFeatured: true,
-            rating: 4.5,
-          },
-          {
-            id: 3,
-            company: "Sweet Sensations",
-            logo: "S",
-            image: "/placeholder.svg?height=64&width=64",
-            title: "Pastry Chef",
-            location: "Chicago, IL",
-            type: "Contract",
-            time: "2d ago",
-            tags: [
-              "Dessert Creation",
-              "Baking",
-              "Cake Decoration",
-              "Menu Planning",
-            ],
-            isNew: true,
-            rating: 4.2,
-          },
         ].map((job, index) => (
           <motion.div
             key={index}
@@ -177,7 +166,7 @@ function JobSeekerSection() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <Card className="h-full flex flex-col">
-              <CardContent className="p-4 flex-grow card-box-shadow">
+              <CardContent className="p-4 sm:p-6 card-box-shadow">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-4">
                     <Avatar className="h-16 w-16 mr-3">
@@ -228,7 +217,6 @@ function JobSeekerSection() {
                       <Button className="w-full bg-cyan-700 hover:bg-cyan-800">
                         Apply Now
                       </Button>
-
                       <Link href={`/messaging/${job.id}`}>
                         <Button variant="outline" className="w-full bg-white">
                           <MessageSquare className="h-4 w-4 mr-2" />
@@ -244,55 +232,6 @@ function JobSeekerSection() {
         ))}
       </div>
     </motion.div>
-  );
-}
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("jobSeeker");
-
-  return (
-    <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        {/* <motion.h1
-            className="text-4xl font-bold text-center mb-8 text-cyan-800"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Short Staffed. Restaurant Industry Job
-          </motion.h1> */}
-
-        <div className="flex justify-center mb-8">
-          <Button
-            variant={activeTab === "jobSeeker" ? "default" : "outline"}
-            className={`mr-2 ${
-              activeTab === "jobSeeker"
-                ? "bg-cyan-700 hover:bg-cyan-800"
-                : "text-cyan-700 hover:text-cyan-800"
-            }`}
-            onClick={() => setActiveTab("jobSeeker")}
-          >
-            <Briefcase className="mr-2 h-4 w-4" /> Job Seekers
-          </Button>
-          <Button
-            variant={activeTab === "employer" ? "default" : "outline"}
-            className={
-              activeTab === "employer"
-                ? "bg-cyan-700 hover:bg-cyan-800"
-                : "text-cyan-700 hover:text-cyan-800"
-            }
-            onClick={() => setActiveTab("employer")}
-          >
-            <Utensils className="mr-2 h-4 w-4" /> Employers
-          </Button>
-        </div>
-
-        {activeTab === "jobSeeker" && <JobSeekerSection />}
-        {activeTab === "employer" && <EmployerSection />}
-      </main>
-      <Footer />
-    </div>
   );
 }
 
