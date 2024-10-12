@@ -45,7 +45,7 @@ function JobSeekerSection() {
               className="w-full sm:w-1/3"
             />
             <Input placeholder="Location" className="w-full sm:w-1/3" />
-            <Button className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto bg-cyan-700 hover:bg-cyan-800">
               <Search className="mr-2 h-4 w-4" /> Search
             </Button>
           </div>
@@ -167,7 +167,7 @@ function JobSeekerSection() {
                       </span>
                     </div>
                     <div className="flex flex-col space-y-2">
-                      <Button className="w-full bg-blue-400 hover:bg-blue-600">
+                      <Button className="w-full bg-cyan-700 hover:bg-cyan-800">
                         Apply Now
                       </Button>
 
@@ -193,10 +193,10 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("jobSeeker");
 
   return (
-    <div className="min-h-screen bg-gradient-to-t from-blue-100 to-blue-100 ">
+    <div className="min-h-screen bg-gradient-to-t from-cyan-100 to-cyan-50">
       <main className="container mx-auto px-4 py-8">
         <motion.h1
-          className="text-4xl font-bold text-center mb-8 text-black"
+          className="text-4xl font-bold text-center mb-8 text-cyan-800"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -207,13 +207,22 @@ export default function Home() {
         <div className="flex justify-center mb-8">
           <Button
             variant={activeTab === "jobSeeker" ? "default" : "outline"}
-            className="mr-2"
+            className={`mr-2 ${
+              activeTab === "jobSeeker"
+                ? "bg-cyan-700 hover:bg-cyan-800"
+                : "text-cyan-700 hover:text-cyan-800"
+            }`}
             onClick={() => setActiveTab("jobSeeker")}
           >
             <Briefcase className="mr-2 h-4 w-4" /> Job Seekers
           </Button>
           <Button
             variant={activeTab === "employer" ? "default" : "outline"}
+            className={
+              activeTab === "employer"
+                ? "bg-cyan-700 hover:bg-cyan-800"
+                : "text-cyan-700 hover:text-cyan-800"
+            }
             onClick={() => setActiveTab("employer")}
           >
             <Utensils className="mr-2 h-4 w-4" /> Employers
@@ -244,7 +253,7 @@ function EmployerSection() {
         </CardHeader>
         <CardContent>
           <Link href="/create-job-listing">
-            <Button>
+            <Button className="bg-cyan-700 hover:bg-cyan-800">
               <PlusCircle className="mr-2 h-4 w-4" /> Create Job Listing
             </Button>
           </Link>
@@ -284,12 +293,18 @@ function EmployerSection() {
               <CardContent>
                 <div className="space-y-2">
                   <Link href="/view-applications">
-                    <Button variant="default" className="w-full">
+                    <Button
+                      variant="default"
+                      className="w-full bg-cyan-700 hover:bg-cyan-800"
+                    >
                       View Applications
                     </Button>
                   </Link>
                   <Link href={`/messaging/${listing.id}`}>
-                    <Button variant="outline" className="w-full">
+                    <Button
+                      variant="outline"
+                      className="w-full text-cyan-700 hover:text-cyan-800"
+                    >
                       <MessageSquare className="mr-2 h-4 w-4" />
                       Message Applicants
                     </Button>
