@@ -244,7 +244,7 @@ function JobSeekerSection() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <Card className="h-full flex flex-col">
-              <CardContent className="p-4 sm:p-6 card-box-shadow">
+              <CardContent className="p-4 sm:p-6 card-box-shadow h-full">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-4">
                     <Avatar className="h-16 w-16 mr-3">
