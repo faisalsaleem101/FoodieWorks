@@ -147,15 +147,21 @@ function JobSeekerSection() {
   );
 
   useEffect(() => {
-    // Load the Google Places API script
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIEI7uXkQYwR_bPJkuK9FCigqvoZtbGew&libraries=places`;
-    script.async = true;
-    script.onload = initAutocomplete;
-    document.body.appendChild(script);
+    if (
+      !document.querySelector('script[src*="maps.googleapis.com/maps/api/js"]')
+    ) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIEI7uXkQYwR_bPJkuK9FCigqvoZtbGew&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = initAutocomplete;
+      document.head.appendChild(script);
+    } else {
+      initAutocomplete();
+    }
 
     return () => {
-      document.body.removeChild(script);
+      // Clean up is not needed as we're not removing the script
     };
   }, []);
 
