@@ -257,7 +257,7 @@ export default function CreateJobListing() {
                     className="bg-cyan-500 hover:bg-cyan-600 text-white"
                   >
                     <Maximize2 className="mr-2 h-4 w-4" />
-                    Expand
+                    Expand Description
                   </Button>
                 </div>
               </div>
