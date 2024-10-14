@@ -197,7 +197,7 @@ export default function CreateJobListing() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="qualifications">Qualifications</Label>
+              <Label htmlFor="qualifications">Qualifications/Skills</Label>
               <Textarea
                 id="qualifications"
                 placeholder="List required skills, experience, and education"
