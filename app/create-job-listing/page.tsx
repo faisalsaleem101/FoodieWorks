@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -69,7 +69,9 @@ export default function CreateJobListing() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setJobDetails((prev) => ({ ...prev, [id]: value }));
   };
@@ -97,7 +99,7 @@ export default function CreateJobListing() {
     }
   };
 
-  const handleDescriptionChange = (newDescription) => {
+  const handleDescriptionChange = (newDescription: string) => {
     setJobDetails((prev) => ({ ...prev, description: newDescription }));
   };
 
