@@ -10,6 +10,7 @@ import {
   Clock,
   Calendar,
   Wand2,
+  Maximize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +33,7 @@ import {
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import JobDescriptionModal from "./JobDescriptionModal";
 
 const apiKey = "AIzaSyDJc3FZ_UlF-6jO7RU0IuEwbWjtg_N6g5s";
 const genAI = new GoogleGenerativeAI(apiKey!);
@@ -65,6 +67,7 @@ export default function CreateJobListing() {
     description: "",
   });
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -92,6 +95,10 @@ export default function CreateJobListing() {
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const handleDescriptionChange = (newDescription) => {
+    setJobDetails((prev) => ({ ...prev, description: newDescription }));
   };
 
   return (
@@ -237,15 +244,25 @@ export default function CreateJobListing() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <Label htmlFor="description">Job Description</Label>
-                <Button
-                  type="button"
-                  onClick={handleGenerateDescription}
-                  disabled={isGenerating}
-                  className="bg-orange-500 hover:bg-orange-600 text-white"
-                >
-                  <Wand2 className="mr-2 h-4 w-4" />
-                  {isGenerating ? "Generating..." : "Generate Description"}
-                </Button>
+                <div className="space-x-2">
+                  <Button
+                    type="button"
+                    onClick={handleGenerateDescription}
+                    disabled={isGenerating}
+                    className="bg-orange-500 hover:bg-orange-600 text-white"
+                  >
+                    <Wand2 className="mr-2 h-4 w-4" />
+                    {isGenerating ? "Generating..." : "Generate Description"}
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                  >
+                    <Maximize2 className="mr-2 h-4 w-4" />
+                    Expand
+                  </Button>
+                </div>
               </div>
               <Textarea
                 id="description"
@@ -262,6 +279,13 @@ export default function CreateJobListing() {
           <Button>Publish Job Listing</Button>
         </CardFooter>
       </Card>
+
+      <JobDescriptionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        description={jobDetails.description}
+        onDescriptionChange={handleDescriptionChange}
+      />
     </div>
   );
 }
