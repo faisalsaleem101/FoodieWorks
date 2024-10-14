@@ -104,7 +104,7 @@ export default function CreateJobListing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-cyan-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-cyan-50 p-4 sm:p-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ export default function CreateJobListing() {
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Link>
-        <h1 className="text-4xl font-bold text-cyan-700 mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-cyan-700 mb-8">
           Create Job Listing
         </h1>
       </motion.div>
@@ -244,9 +244,9 @@ export default function CreateJobListing() {
             </div>
 
             <div className="space-y-2">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <Label htmlFor="description">Job Description</Label>
-                <div className="space-x-2">
+                <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                   <Button
                     type="button"
                     onClick={handleGenerateDescription}
@@ -276,9 +276,11 @@ export default function CreateJobListing() {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Save as Draft</Button>
-          <Button className="bg-cyan-500 hover:bg-cyan-600 text-white">
+        <CardFooter className="flex flex-col sm:flex-row justify-between gap-2">
+          <Button variant="outline" className="w-full sm:w-auto">
+            Save as Draft
+          </Button>
+          <Button className="bg-cyan-500 hover:bg-cyan-600 text-white w-full sm:w-auto">
             Publish Job Listing
           </Button>
         </CardFooter>
