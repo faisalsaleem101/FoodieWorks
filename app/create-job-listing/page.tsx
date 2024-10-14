@@ -104,7 +104,7 @@ export default function CreateJobListing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-cyan-50 p-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -112,12 +112,12 @@ export default function CreateJobListing() {
       >
         <Link
           href="/"
-          className="inline-flex items-center text-orange-800 hover:text-orange-600 mb-6"
+          className="inline-flex items-center text-cyan-600 hover:text-cyan-800 mb-6"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Link>
-        <h1 className="text-4xl font-bold text-orange-800 mb-8">
+        <h1 className="text-4xl font-bold text-cyan-700 mb-8">
           Create Job Listing
         </h1>
       </motion.div>
@@ -251,7 +251,7 @@ export default function CreateJobListing() {
                     type="button"
                     onClick={handleGenerateDescription}
                     disabled={isGenerating}
-                    className="bg-orange-500 hover:bg-orange-600 text-white"
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
                   >
                     <Wand2 className="mr-2 h-4 w-4" />
                     {isGenerating ? "Generating..." : "Generate Description"}
