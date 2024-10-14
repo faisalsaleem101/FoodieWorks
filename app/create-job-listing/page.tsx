@@ -42,6 +42,7 @@ const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
 });
 
+// Function to call Gemini API
 async function callGeminiAPI(message: string) {
   try {
     const result = await model.generateContent([message]);
@@ -88,6 +89,7 @@ export default function CreateJobListing() {
       var cleanedDescription = "";
 
       if (generatedDescription.trim() !== "") {
+        // Remove ** and ## only if generatedDescription is a non-empty string
         cleanedDescription = generatedDescription.replace(/[\*\#]/g, "");
       }
 
@@ -97,6 +99,7 @@ export default function CreateJobListing() {
       }));
     } catch (error) {
       console.error("Error generating description:", error);
+      // Handle error (e.g., show error message to user)
     } finally {
       setIsGenerating(false);
     }
@@ -133,68 +136,58 @@ export default function CreateJobListing() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <Label htmlFor="jobTitle" className="text-sm">
-                  Job Title
-                </Label>
-                <Input
-                  id="jobTitle"
-                  placeholder="e.g., Head Chef"
-                  value={jobDetails.jobTitle}
-                  onChange={handleInputChange}
-                  className="h-8 text-sm"
-                />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="jobType" className="text-sm">
-                  Job Type
-                </Label>
-                <Select
-                  onValueChange={(value) => {
-                    setJobType(value);
-                    setJobDetails((prev) => ({ ...prev, jobType: value }));
-                  }}
-                >
-                  <SelectTrigger className="h-8">
-                    <SelectValue placeholder="Select job type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="full-time">Full-time</SelectItem>
-                    <SelectItem value="part-time">Part-time</SelectItem>
-                    <SelectItem value="contract">Contract</SelectItem>
-                    <SelectItem value="temporary">Temporary</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+          <form className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="jobTitle">Job Title</Label>
+              <Input
+                id="jobTitle"
+                placeholder="e.g., Head Chef, Sous Chef, Line Cook"
+                value={jobDetails.jobTitle}
+                onChange={handleInputChange}
+              />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <Label htmlFor="salary" className="text-sm">
-                  Salary Range
-                </Label>
+            <div className="space-y-2">
+              <Label htmlFor="jobType">Job Type</Label>
+              <Select
+                onValueChange={(value) => {
+                  setJobType(value);
+                  setJobDetails((prev) => ({ ...prev, jobType: value }));
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select job type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="full-time">Full-time</SelectItem>
+                  <SelectItem value="part-time">Part-time</SelectItem>
+                  <SelectItem value="contract">Contract</SelectItem>
+                  <SelectItem value="temporary">Temporary</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="salary">Salary Range</Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 h-3 w-3" />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                   <Input
                     id="salary"
-                    className="pl-7 h-8 text-sm"
+                    className="pl-10"
                     placeholder="e.g., 50,000 - 70,000"
                     value={jobDetails.salary}
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="location" className="text-sm">
-                  Location
-                </Label>
+              <div className="space-y-2">
+                <Label htmlFor="location">Location</Label>
                 <div className="relative">
-                  <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 h-3 w-3" />
+                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                   <Input
                     id="location"
-                    className="pl-7 h-8 text-sm"
+                    className="pl-10"
                     placeholder="e.g., New York, NY"
                     value={jobDetails.location}
                     onChange={handleInputChange}
@@ -214,32 +207,30 @@ export default function CreateJobListing() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <Label htmlFor="startDate" className="text-sm">
-                  Start Date
-                </Label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="startDate">Start Date</Label>
                 <div className="relative">
-                  <Calendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 h-3 w-3" />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                   <Input
                     id="startDate"
                     type="date"
-                    className="pl-7 h-8 text-sm"
+                    className="pl-10"
                     value={jobDetails.startDate}
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="applicationDeadline" className="text-sm">
+              <div className="space-y-2">
+                <Label htmlFor="applicationDeadline">
                   Application Deadline
                 </Label>
                 <div className="relative">
-                  <Clock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 h-3 w-3" />
+                  <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                   <Input
                     id="applicationDeadline"
                     type="date"
-                    className="pl-7 h-8 text-sm"
+                    className="pl-10"
                     value={jobDetails.applicationDeadline}
                     onChange={handleInputChange}
                   />
