@@ -87,9 +87,16 @@ export default function CreateJobListing() {
       Please write a comprehensive and engaging job description based on this information.`;
 
       const generatedDescription = await callGeminiAPI(prompt);
+      var cleanedDescription = "";
+
+      if (generatedDescription.trim() !== "") {
+        // Remove ** and ## only if generatedDescription is a non-empty string
+        cleanedDescription = generatedDescription.replace(/[\*\#]/g, "");
+      }
+
       setJobDetails((prev) => ({
         ...prev,
-        description: generatedDescription || "",
+        description: cleanedDescription || "",
       }));
     } catch (error) {
       console.error("Error generating description:", error);
