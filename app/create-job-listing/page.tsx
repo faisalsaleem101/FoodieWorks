@@ -278,7 +278,9 @@ export default function CreateJobListing() {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button variant="outline">Save as Draft</Button>
-          <Button>Publish Job Listing</Button>
+          <Button className="bg-cyan-500 hover:bg-cyan-600 text-white">
+            Publish Job Listing
+          </Button>
         </CardFooter>
       </Card>
 
