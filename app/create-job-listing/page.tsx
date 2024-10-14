@@ -61,7 +61,6 @@ export default function CreateJobListing() {
     salary: "",
     location: "",
     qualifications: "",
-    benefits: "",
     startDate: "",
     applicationDeadline: "",
     description: "",
@@ -82,7 +81,7 @@ export default function CreateJobListing() {
       const prompt = `Create a job description for a ${jobDetails.jobTitle} position. 
       This is a ${jobDetails.jobType} role with a salary range of ${jobDetails.salary}, 
       located in ${jobDetails.location}. The qualifications needed are: ${jobDetails.qualifications}. 
-      Benefits include: ${jobDetails.benefits}. The start date is ${jobDetails.startDate} 
+      The start date is ${jobDetails.startDate} 
       and the application deadline is ${jobDetails.applicationDeadline}. 
       Please write a comprehensive and engaging job description based on this information.`;
 
@@ -237,17 +236,6 @@ export default function CreateJobListing() {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="benefits">Benefits</Label>
-              <Textarea
-                id="benefits"
-                placeholder="List any benefits or perks associated with this position"
-                rows={3}
-                value={jobDetails.benefits}
-                onChange={handleInputChange}
-              />
             </div>
 
             <div className="space-y-2">
