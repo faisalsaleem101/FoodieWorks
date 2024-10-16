@@ -77,7 +77,7 @@ export default function ViewApplications() {
     useState<Application | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100 p-4 sm:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-cyan-50 p-4 sm:p-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,12 +85,12 @@ export default function ViewApplications() {
       >
         <Link
           href="/"
-          className="inline-flex items-center text-orange-800 hover:text-orange-600 mb-6"
+          className="inline-flex items-center text-cyan-700 hover:text-cyan-600 mb-6"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Link>
-        <h1 className="text-3xl sm:text-4xl font-bold text-orange-800 mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-cyan-700 mb-8">
           View Applications
         </h1>
       </motion.div>
@@ -178,23 +178,23 @@ export default function ViewApplications() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="flex items-center">
-                        <Briefcase className="h-5 w-5 mr-2 text-orange-600" />
+                        <Briefcase className="h-5 w-5 mr-2 text-cyan-600" />
                         <span>{selectedApplication.experience} experience</span>
                       </div>
                       <div className="flex items-center">
-                        <MapPin className="h-5 w-5 mr-2 text-orange-600" />
+                        <MapPin className="h-5 w-5 mr-2 text-cyan-600" />
                         <span>{selectedApplication.location}</span>
                       </div>
                       <div className="flex items-center">
-                        <Mail className="h-5 w-5 mr-2 text-orange-600" />
+                        <Mail className="h-5 w-5 mr-2 text-cyan-600" />
                         <span>{selectedApplication.email}</span>
                       </div>
                       <div className="flex items-center">
-                        <Phone className="h-5 w-5 mr-2 text-orange-600" />
+                        <Phone className="h-5 w-5 mr-2 text-cyan-600" />
                         <span>{selectedApplication.phone}</span>
                       </div>
                       <div className="flex items-center">
-                        <Calendar className="h-5 w-5 mr-2 text-orange-600" />
+                        <Calendar className="h-5 w-5 mr-2 text-cyan-600" />
                         <span>
                           Applied on {selectedApplication.appliedDate}
                         </span>
@@ -220,7 +220,7 @@ export default function ViewApplications() {
                   <div className="mt-6">
                     <h3 className="font-semibold mb-2">Actions</h3>
                     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                      <Button className="w-full sm:w-auto">
+                      <Button className="w-full sm:w-auto bg-cyan-700 hover:bg-cyan-800">
                         Schedule Interview
                       </Button>
                       <Link
