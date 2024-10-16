@@ -97,7 +97,7 @@ export default function MessagingPage({ params }: { params: { id: string } }) {
 
         <div
           id="message-list"
-          className="h-[calc(100vh-200px)] overflow-y-auto p-4 space-y-4"
+          className="flex-grow overflow-y-auto p-4 space-y-4 message-list"
         >
           {messages.map((message) => (
             <motion.div
