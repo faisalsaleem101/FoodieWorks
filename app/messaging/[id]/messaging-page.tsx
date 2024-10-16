@@ -69,14 +69,14 @@ export default function MessagingPage({ params }: { params: { id: string } }) {
   }, [messages]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-red-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-cyan-50 p-4 md:p-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden"
       >
-        <div className="bg-orange-600 text-white p-4 flex items-center">
+        <div className="bg-cyan-700 text-white p-4 flex items-center">
           <Link href="/view-applications" className="mr-4">
             <ArrowLeft className="h-6 w-6" />
           </Link>
@@ -112,7 +112,7 @@ export default function MessagingPage({ params }: { params: { id: string } }) {
               <div
                 className={`max-w-[70%] p-3 rounded-lg ${
                   message.sender === "user"
-                    ? "bg-orange-500 text-white"
+                    ? "bg-cyan-500 text-white"
                     : "bg-gray-200"
                 }`}
               >
